@@ -14,6 +14,9 @@ class ClientPrefs {
 	public static var middleScroll:Bool = false;
 	public static var reanimatedbf:Bool = false;
 	public static var showFPS:Bool = true;
+	public static var controllerMode:Bool = #if android true #else false #end;
+	public static var hitboxalpha:Float = 0.2; 
+	public static var hitboxmode:String = 'Classic';
 	public static var flashing:Bool = true;
 	public static var globalAntialiasing:Bool = true;
 	public static var noteSplashes:Bool = true;
@@ -31,7 +34,6 @@ class ClientPrefs {
 	public static var scoreZoom:Bool = true;
 	public static var noReset:Bool = false;
 	public static var healthBarAlpha:Float = 1;
-	public static var controllerMode:Bool = false;
 	public static var animatedbg:Bool = true;
 	public static var camGlitch:Bool = true;
 	public static var gameplaySettings:Map<String, Dynamic> = [
@@ -125,6 +127,9 @@ class ClientPrefs {
 		FlxG.save.data.animatedbg = animatedbg;
 		FlxG.save.data.camGlitch = camGlitch;
 	
+		FlxG.save.data.hitboxmode = hitboxmode;
+		FlxG.save.data.hitboxalpha = hitboxalpha;
+		
 		FlxG.save.flush();
 
 		var save:FlxSave = new FlxSave();
@@ -239,6 +244,12 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.controllerMode != null) {
 			controllerMode = FlxG.save.data.controllerMode;
+		}
+		if(FlxG.save.data.hitboxmode != null) {
+			hitboxmode = FlxG.save.data.hitboxmode;
+		}
+		if(FlxG.save.data.hitboxalpha != null) {
+			hitboxalpha = FlxG.save.data.hitboxalpha;
 		}
 		if(FlxG.save.data.animatedbg != null) {
 			animatedbg = FlxG.save.data.animatedbg;
