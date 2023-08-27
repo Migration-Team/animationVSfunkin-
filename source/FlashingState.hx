@@ -27,15 +27,19 @@ class FlashingState extends MusicBeatState
 		warnText = new FlxText(0, 0, FlxG.width,
 			"Hey there person man/woman   \n
 			Some songs contains some flashing and it may cause a headache,\n
-			Press Esc if you want to disable it or press Enter if you don't wanna disable it,\n
+			Press B if you want to disable it or press A if you don't wanna disable it,\n
 			\n
 			Hope you enjoy this mod.",
 			32);
 		warnText.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER);
 		warnText.screenCenter(Y);
 		add(warnText);
-	}
 
+		#if android
+                addVirtualPad(NONE, A_B);
+                #end
+	}
+	
 	override function update(elapsed:Float)
 	{
 		if (FlxG.keys.justPressed.ENTER) {
