@@ -54,7 +54,7 @@ class FlashingState extends MusicBeatState
 	
 	override function update(elapsed:Float)
 	{
-		if (FlxG.keys.justPressed.ENTER) {
+		if (FlxG.keys.justPressed.ENTER #if android || _virtualpad.buttonA.justPressed #end) {
 			var save:FlxSave = new FlxSave();
 			save.bind('avfnf', 'ninjamuffin99');
 			save.data.flashinglol = true;
@@ -66,7 +66,7 @@ class FlashingState extends MusicBeatState
 			FlxG.sound.play(Paths.sound('cancelMenu'));
             FlxTween.tween(warnText, {alpha: 0}, 1, {
             });
-		} else if (FlxG.keys.justPressed.ESCAPE) {
+		} else if (FlxG.keys.justPressed.ESCAPE #if android || _virtualpad.buttonB.justPressed #end) {
 			var save:FlxSave = new FlxSave();
 			save.bind('avfnf', 'ninjamuffin99');
 			save.data.flashinglol = true;
