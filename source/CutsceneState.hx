@@ -38,7 +38,7 @@ class CutsceneState extends MusicBeatState
 
 	public override function create()
 	{
-		video.playVideo(Asset2File.getPath(Paths.video(path)));
+		video.playVideo(Paths.video(path));
 		video.finishCallback = function()
 		{
 			MusicBeatState.switchState(new PlayState());
