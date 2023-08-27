@@ -168,6 +168,10 @@ class NewCreditsState extends MusicBeatState
         nameText.x = namebgx + 10;
         nameText.y = namebgy + 5;
 
+		#if android
+                addVirtualPad(LEFT_RIGHT, A_B);
+                #end
+		
 		super.create();
 	}
 
