@@ -154,6 +154,8 @@
 	<haxedef name="HXC_DEBUG_TRACE" if="debug" />
 	
 	<!--Place custom nodes like icons here (higher priority to override the HaxeFlixel icon)-->
+	<config:android permission="android.permission.READ_EXTERNAL_STORAGE" if="android"/>
+	<config:android permission="android.permission.WRITE_EXTERNAL_STORAGE" if="android"/>
 	
 	<icon path="art/icon16.png" size='16'/>
 	<icon path="art/icon32.png" size='32'/>
