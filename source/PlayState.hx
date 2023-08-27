@@ -1877,36 +1877,44 @@ class PlayState extends MusicBeatState
 
 	public function startVideo(name:String)
 	{
-		#if sys 
+		#if VIDEOS_ALLOWED
 		inCutscene = true;
 
 		var filepath:String = Paths.video(name);
-		#if desktop 
+		#if sys
 		if(!FileSystem.exists(filepath))
-		#elseif android
+		#else
 		if(!OpenFlAssets.exists(filepath))
 		#end
 		{
 			FlxG.log.warn('Couldnt find video file: ' + name);
-			
+			startAndEnd();
 			return;
 		}
 
-		var video:VideoHandler = new VideoHandler();
-		video.playVideo(Asset2File.getPath(filepath));
+		var video:MP4Handler = new MP4Handler();
+		video.playVideo(filepath);
 		video.finishCallback = function()
 		{
-			
+			startAndEnd();
 			return;
 		}
 		#else
 		FlxG.log.warn('Platform not supported!');
-		
+		startAndEnd();
 		return;
 		#end
 	}
 
-	var dialogueCount:Int = 0;
+	function startAndEnd()
+	{
+		if(endingSong)
+			endSong();
+		else
+			startCountdown();
+	}
+        
+        var dialogueCount:Int = 0;
 	//You don't have to add a song, just saying. You can just do "startDialogue(dialogueJson);" and it should work
 	public function startDialogue(dialogueFile:DialogueFile, ?song:String = null):Void
 	{
