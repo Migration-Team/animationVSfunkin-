@@ -1681,10 +1681,10 @@ class PlayState extends MusicBeatState
 			switch (Paths.formatToSongPath(curSong))
 			{
 				case "unwelcomed":
-					startMP4vid('assets/videos/cutscene_red.mp4');
+					startVideo('cutscene_red');
 					
 				case "mastermind":
-					startMP4vid('assets/videos/cutscene_blue.mp4');
+					startVideo('cutscene_blue');
 				case "stickin-to-it":
 					startVideo('cutscene_green');
 				case "repeater":
