@@ -85,7 +85,6 @@ import flash.system.Capabilities;
 #if sys
 import sys.FileSystem;
 #end
-
 #if VIDEOS_ALLOWED
 #if (hxCodec >= "2.6.1") 
 import hxcodec.VideoHandler as MP4Handler;
@@ -95,7 +94,6 @@ import VideoHandler as MP4Handler;
 import vlc.MP4Handler;
 #end
 #end
-
 using StringTools;
 
 class PlayState extends MusicBeatState
@@ -1011,8 +1009,8 @@ class PlayState extends MusicBeatState
 					animatedbg.scale.set(1.5, 1.5);
 					animatedbg.screenCenter();
 				} else {
-					var video:MP4Handler = new MP4Handler();
-					video.playVideo(Paths.video('animatedbg'), null, animatedbg);
+					/*var video:MP4Handler = new MP4Handler();
+					video.playVideo(Paths.video('animatedbg'), null, animatedbg);*/
 				}
 				
 				add(animatedbg);
@@ -1056,8 +1054,8 @@ class PlayState extends MusicBeatState
 					fallenbg.scale.set(1.5, 1.5);
 					fallenbg.screenCenter();
 				} else {
-					var video:MP4Handler = new MP4Handler();
-					video.playVideo(Paths.video('fallingbg'), null, fallenbg);
+					/*var video:MP4Handler = new MP4Handler();
+					video.playVideo(Paths.video('fallingbg'), null, fallenbg);*/
 				}
 				
 				add(fallenbg);
@@ -1683,17 +1681,18 @@ class PlayState extends MusicBeatState
 			switch (Paths.formatToSongPath(curSong))
 			{
 				case "unwelcomed":
-					startMP4vid('cutscene_red');
+					startMP4vid('assets/videos/cutscene_red.mp4');
+					
 				case "mastermind":
-					startMP4vid('cutscene_blue');
+					startMP4vid('assets/videos/cutscene_blue.mp4');
 				case "stickin-to-it":
-					startMP4vid('cutscene_green');
+					startVideo('cutscene_green');
 				case "repeater":
-					startMP4vid('cutscene_yellow');
+					startVideo('cutscene_yellow');
 				case "rock-blocks":
-					startMP4vid('cutscene_tsc');
+					startVideo('cutscene_tsc');
 				case 'stick-symphony':
-					startMP4vid('BandCutscene');
+					startVideo('BandCutscene');
 				case 'vengeance':
 					startVideo('makesomenoise_cut');
 				default:
@@ -1876,53 +1875,35 @@ class PlayState extends MusicBeatState
 		char.y += char.positionArray[1];
 	}
 
-	public function startVideo(name:String):Void {
-		#if VIDEOS_ALLOWED
-		var foundFile:Bool = false;
-		var fileName:String = #if MODS_ALLOWED Paths.modFolders('videos/' + name + '.' + Paths.VIDEO_EXT); #else ''; #end
-		#if sys
-		if(FileSystem.exists(fileName)) {
-			foundFile = true;
-		}
+	public function startVideo(name:String)
+	{
+		#if sys 
+		inCutscene = true;
+
+		var filepath:String = Paths.video(name);
+		#if desktop 
+		if(!FileSystem.exists(filepath))
+		#elseif android
+		if(!OpenFlAssets.exists(filepath))
 		#end
-
-		if(!foundFile) {
-			fileName = Paths.video(name);
-			#if sys
-			if(FileSystem.exists(fileName)) {
-			#else
-			if(OpenFlAssets.exists(fileName)) {
-			#end
-				foundFile = true;
-			}
-		}
-
-		if(foundFile) {
-			inCutscene = true;
-			var bg = new FlxSprite(-FlxG.width, -FlxG.height).makeGraphic(FlxG.width * 3, FlxG.height * 3, FlxColor.BLACK);
-			bg.scrollFactor.set();
-			bg.cameras = [camHUD];
-			add(bg);
-
-			(new MP4Handler(fileName)).finishCallback = function() {
-				remove(bg);
-				if(endingSong) {
-					endSong();
-				} else {
-					startCountdown();
-					creditthing();
-				}
-			}
+		{
+			FlxG.log.warn('Couldnt find video file: ' + name);
+			
 			return;
-		} else {
-			FlxG.log.warn('Couldnt find video file: ' + fileName);
 		}
+
+		var video:VideoHandler = new VideoHandler();
+		video.playVideo(Asset2File.getPath(filepath));
+		video.finishCallback = function()
+		{
+			
+			return;
+		}
+		#else
+		FlxG.log.warn('Platform not supported!');
+		
+		return;
 		#end
-		if(endingSong) {
-			endSong();
-		} else {
-			startCountdown();
-		}
 	}
 
 	var dialogueCount:Int = 0;
@@ -1961,17 +1942,18 @@ class PlayState extends MusicBeatState
 			startCountdown();
 		}
 		
-   function startMP4vid(name:String)
+   function MP4Handler(name:String)
    {
 	   
 	   var video:MP4Handler = new MP4Handler();
-	   video.playMP4(Paths.video(name));
+	   video.playVideo(Asset2File.getPath(Paths.video(name)));
 	   video.finishCallback = function()
 	   {
 		   LoadingState.loadAndSwitchState(new PlayState());
 	   }
 	   isCutscene = true;
    }
+
 
 	var startTimer:FlxTimer;
 	var finishTimer:FlxTimer = null;
@@ -3999,7 +3981,7 @@ class PlayState extends MusicBeatState
 					} else {
 						FlxG.sound.playMusic(Paths.music('nothin'), 0);
 						var video:MP4Handler = new MP4Handler();
-						video.playMP4(Paths.video('cutscene_end'));
+						video.playVideo(Asset2File.getPath(Paths.video('cutscene_end')));
 						video.finishCallback = function()
 						{
 							FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
