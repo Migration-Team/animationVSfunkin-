@@ -44,6 +44,7 @@ class Alphabet extends FlxSpriteGroup
 	var isBold:Bool = false;
 	public var lettersArray:Array<AlphaCharacter> = [];
 
+	public var letters:Array<AlphaCharacter> = [];
 	public var finishedText:Bool = false;
 	public var typed:Bool = false;
 
@@ -112,7 +113,25 @@ class Alphabet extends FlxSpriteGroup
 		x = lastX;
 	}
 
-		private function set_scaleX(value:Float)
+		public function clearLetters()
+	{
+		var i:Int = letters.length;
+		while (i > 0)
+		{
+			--i;
+			var letter:AlphaCharacter = letters[i];
+			if(letter != null)
+			{
+				letter.kill();
+				letters.remove(letter);
+				letter.destroy();
+			}
+		}
+		letters = [];
+		rows = 0;
+	}
+	        
+	        private function set_scaleX(value:Float)
 	{
 		if (value == scaleX) return value;
 
