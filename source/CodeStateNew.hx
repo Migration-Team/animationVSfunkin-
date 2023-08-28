@@ -170,11 +170,13 @@ class CodeStateNew extends MusicBeatState
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			MusicBeatState.switchState(new MainMenuState());
 		}
-		if (FlxG.keys.justPressed.ANY)
+		#if android
+                if (FlxG.keys.justPressed.ANY)
 		{
 			FlxG.sound.play(Paths.sound('keyboardPress'));
 		}
-	}
+	        #end
+           }
 	
 	function badcode() {
 		FlxG.camera.shake(0.0075, 0.50);
