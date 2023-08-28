@@ -161,11 +161,11 @@ class CodeStateNew extends MusicBeatState
 	
 	override public function update(elapsed:Float)
 	{
-		if (FlxG.keys.justPressed.BACKSPACE #if android || _virtualpad.buttonA.justPressed #end;)
+		if (FlxG.keys.justPressed.BACKSPACE #if android || _virtualpad.buttonA.justPressed #end)
 		{
 			FlxG.sound.play(Paths.sound('keyboardPress'));
 		}
-		else if (controls.BACK #if android || _virtualpad.buttonB.justPressed #end;)
+		else if (controls.BACK #if android || _virtualpad.buttonB.justPressed #end)
 		{
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			MusicBeatState.switchState(new MainMenuState());
