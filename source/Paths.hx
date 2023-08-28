@@ -231,7 +231,7 @@ class Paths
 
 	inline static public function inst(song:String):Any
 	{
-		var songKey:String = songKey:String = '${formatToSongPath(song)}/Inst';
+		var songKey:String = '${formatToSongPath(song)}/Inst';
 		var inst = returnSound('songs', songKey);
 		return inst;
 	}
