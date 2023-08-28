@@ -1893,6 +1893,7 @@ class PlayState extends MusicBeatState
 		#end
 		{
 			FlxG.log.warn('Couldnt find video file: ' + name);
+			startAndEnd();
 			return;
 		}
 
@@ -1900,15 +1901,23 @@ class PlayState extends MusicBeatState
 		video.playVideo(filepath);
 		video.finishCallback = function()
 		{
-			
+			startAndEnd();
 			return;
 		}
 		#else
 		FlxG.log.warn('Platform not supported!');
+		startAndEnd();
 		return;
 		#end
 	}
 
+        function startAndEnd()
+	{
+		if(endingSong)
+			endSong();
+		else
+			startCountdown();
+	}
         
         var dialogueCount:Int = 0;
 	//You don't have to add a song, just saying. You can just do "startDialogue(dialogueJson);" and it should work
