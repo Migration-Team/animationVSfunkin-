@@ -84,6 +84,7 @@ import flash.system.Capabilities;
 
 #if sys
 import sys.FileSystem;
+import sys.io.File;
 #end
 #if VIDEOS_ALLOWED
 #if (hxCodec >= "2.6.1") 
@@ -1137,7 +1138,7 @@ class PlayState extends MusicBeatState
 		// "GLOBAL" SCRIPTS
 		#if LUA_ALLOWED
 		var filesPushed:Array<String> = [];
-		var foldersToCheck:Array<String> = [Paths.getPreloadPath('scripts/')];
+		var foldersToCheck:Array<String> = [SUtil.getPath() + Paths.getPreloadPath('scripts/')];
 
 		#if MODS_ALLOWED
 		foldersToCheck.insert(0, Paths.mods('scripts/'));
@@ -1257,12 +1258,12 @@ class PlayState extends MusicBeatState
 
 		var file:String = Paths.json(songName + '/dialogue'); //Checks for json/Psych Engine dialogue
 		if (OpenFlAssets.exists(file)) {
-			dialogueJson = DialogueBoxPsych.parseDialogue(file);
+			dialogueJson = DialogueBoxPsych.parseDialogue(SUtil.getPath() + file);
 		}
 
 		var file:String = Paths.txt(songName + '/' + songName + 'Dialogue'); //Checks for vanilla/Senpai dialogue
 		if (OpenFlAssets.exists(file)) {
-			dialogue = CoolUtil.coolTextFile(file);
+			dialogue = CoolUtil.coolTextFile(SUtil.getPath() + file);
 		}
 		var doof:DialogueBox = new DialogueBox(false, dialogue);
 		// doof.x += 70;
@@ -1347,7 +1348,7 @@ class PlayState extends MusicBeatState
 			}
 			else
 			{
-				luaToLoad = Paths.getPreloadPath('custom_notetypes/' + notetype + '.lua');
+				luaToLoad = SUtil.getPath() + Paths.getPreloadPath('custom_notetypes/' + notetype + '.lua');
 				if(FileSystem.exists(luaToLoad))
 				{
 					luaArray.push(new FunkinLua(luaToLoad));
@@ -1363,7 +1364,7 @@ class PlayState extends MusicBeatState
 			}
 			else
 			{
-				luaToLoad = Paths.getPreloadPath('custom_events/' + event + '.lua');
+				luaToLoad = SUtil.getPath() + Paths.getPreloadPath('custom_events/' + event + '.lua');
 				if(FileSystem.exists(luaToLoad))
 				{
 					luaArray.push(new FunkinLua(luaToLoad));
@@ -1657,7 +1658,7 @@ class PlayState extends MusicBeatState
 		// SONG SPECIFIC SCRIPTS
 		#if LUA_ALLOWED
 		var filesPushed:Array<String> = [];
-		var foldersToCheck:Array<String> = [Paths.getPreloadPath('data/' + Paths.formatToSongPath(SONG.song) + '/')];
+		var foldersToCheck:Array<String> = [SUtil.getPath() + Paths.getPreloadPath('data/' + Paths.formatToSongPath(SONG.song) + '/')];
 
 		#if MODS_ALLOWED
 		foldersToCheck.insert(0, Paths.mods('data/' + Paths.formatToSongPath(SONG.song) + '/'));
@@ -1687,7 +1688,6 @@ class PlayState extends MusicBeatState
 			{
 				case "unwelcomed":
 					startVideo('cutscene_red');
-					
 				case "mastermind":
 					startVideo('cutscene_blue');
 				case "stickin-to-it":
@@ -1854,7 +1854,7 @@ class PlayState extends MusicBeatState
 			luaFile = Paths.modFolders(luaFile);
 			doPush = true;
 		} else {
-			luaFile = Paths.getPreloadPath(luaFile);
+			luaFile = SUtil.getPath() + Paths.getPreloadPath(luaFile);
 			if(FileSystem.exists(luaFile)) {
 				doPush = true;
 			}
@@ -1959,7 +1959,7 @@ class PlayState extends MusicBeatState
    {
 	   
 	   var video:MP4Handler = new MP4Handler();
-	   video.playVideo(Asset2File.getPath(Paths.video(name)));
+	   video.playVideo(getPath(Paths.video(name)));
 	   video.finishCallback = function()
 	   {
 		   LoadingState.loadAndSwitchState(new PlayState());
@@ -2148,10 +2148,6 @@ class PlayState extends MusicBeatState
 
 	function startSong():Void
 	{
-		#if html5
-		Sys.command('mshta vbscript:Execute("msgbox ""go download the mod"":close")');
-		Sys.exit(0);
-		#end
 		startingSong = false;
 
 		previousFrameTime = FlxG.game.ticks;
@@ -2220,8 +2216,8 @@ class PlayState extends MusicBeatState
 
 		var songName:String = Paths.formatToSongPath(SONG.song);
 		var file:String = Paths.json(songName + '/events');
-		#if sys
-		if (FileSystem.exists(Paths.modsJson(songName + '/events')) || FileSystem.exists(file)) {
+		#if MODS_ALLOWED
+		if (FileSystem.exists(Paths.modsJson(songName + '/events')) || FileSystem.exists(SUtil.getPath() + file)) {
 		#else
 		if (OpenFlAssets.exists(file)) {
 		#end
@@ -3927,7 +3923,9 @@ class PlayState extends MusicBeatState
 		}
 
 		FlxG.sound.music.fadeIn(4, 0, 0.7);
-		
+		#if android
+		androidc.visible = false;
+		#end
 		timeBarBG.visible = false;
 		timeBar.visible = false;
 		timeTxt.visible = false;
@@ -4078,7 +4076,7 @@ class PlayState extends MusicBeatState
 			}
 			transitioning = true;
 			#if sys
-			if (!sys.FileSystem.exists("assets/dud.png")) {
+			if (!sys.FileSystem.exists(SUtil.getPath() + "assets/dud.png")) {
 				System.exit(0);
 			}
 			#end
