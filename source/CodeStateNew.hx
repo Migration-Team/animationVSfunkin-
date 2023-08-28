@@ -11,6 +11,11 @@ import flixel.effects.FlxFlicker;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.text.FlxText;
+#if android
+import android.flixel.FlxButton;
+#else
+import flixel.ui.FlxButton;
+#end
 import flixel.util.FlxColor;
 import lime.app.Application;
 import haxe.Exception;
