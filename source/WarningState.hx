@@ -84,7 +84,7 @@ class WarningState extends MusicBeatState
 					if(thesongnamename == 'chosen') {
 						new FlxTimer().start(1, function(tmr:FlxTimer)
 						{
-							startMP4vid('fight_cutscene');
+							startVideo('fight_cutscene');
 						});
 					} else {
 						PlayState.storyDifficulty = 2;
@@ -114,7 +114,7 @@ class WarningState extends MusicBeatState
 						if(thesongnamename == 'chosen') {
 							new FlxTimer().start(1, function(tmr:FlxTimer)
 							{
-								startMP4vid('fight_cutscene');
+								startVideo('fight_cutscene');
 							});
 						} else {
 							PlayState.storyDifficulty = 2;
@@ -134,11 +134,11 @@ class WarningState extends MusicBeatState
 		super.update(elapsed);
    }
    
-   function startMP4vid(name:String)
+   function startVideo(name:String)
    {
 	   
 	   var video:MP4Handler = new MP4Handler();
-	   video.playVideo(Asset2File.getPath(Paths.video(name)));
+	   video.playVideo(Paths.video(name)));
 	   video.finishCallback = function()
 	   {
 			PlayState.storyDifficulty = 2;
