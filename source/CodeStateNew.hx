@@ -40,10 +40,6 @@ class CodeStateNew extends MusicBeatState
 	{
 		var save:FlxSave = new FlxSave();
 		save.bind('avfnf', 'ninjamuffin99');
-
-		#if android
-                addVirtualPad(NONE, A_B);
-                #end
 		
 		super.create();
 		
@@ -151,6 +147,11 @@ class CodeStateNew extends MusicBeatState
 		glitchEffect.animation.addByPrefix('idle', "g", 24, true);
 		glitchEffect.scrollFactor.set();
 		glitchEffect.screenCenter();
+	
+	        #if android
+                addVirtualPad(NONE, A_B);
+                #end
+	
 	}
 	
 	override public function update(elapsed:Float)
