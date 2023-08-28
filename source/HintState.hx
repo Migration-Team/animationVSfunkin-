@@ -28,9 +28,6 @@ class HintState extends MusicBeatState
 
     override function create()
     {
-        #if android
-	addVirtualPad(NONE, A);
-	#end
 	    
 	    super.create();
 
@@ -122,6 +119,10 @@ class HintState extends MusicBeatState
         chosenText.cameras = [camChosen];
 
         trace('hints lol');
+   
+        #if android
+	addVirtualPad(NONE, A);
+	#end
     }
 
     override function update(elapsed:Float)
