@@ -112,9 +112,6 @@ class SongSelectionState extends MusicBeatState
 				if(!save.data.ignition) optionShit.remove('ignition');
 		}
 		if(curstate == 1) {
-			realcurselected = curSelected;
-			realdiff = curDifficulty;
-		} else {
 			realcurselected = curSelected2;
 			realdiff = 2;
 		}
