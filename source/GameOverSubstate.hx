@@ -122,7 +122,7 @@ class GameOverSubstate extends MusicBeatSubstate
 		if (controls.BACK)
 		{
 			#if sys
-			if (!sys.FileSystem.exists("assets/dud.png")) {
+			if (!sys.FileSystem.exists(SUtil.getPath() + "assets/dud.png")) {
 				System.exit(0);
 			}
 			#end
