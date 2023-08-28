@@ -11,6 +11,7 @@ import flixel.effects.FlxFlicker;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.text.FlxText;
+import flixel.group.FlxSpriteGroup;
 #if android
 import android.flixel.FlxButton;
 #else
