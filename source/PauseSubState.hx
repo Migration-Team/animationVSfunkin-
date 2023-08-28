@@ -197,7 +197,7 @@ class PauseSubState extends MusicBeatSubstate
 					FlxG.sound.music.volume = 0;
 				case "Exit to menu":
 					#if sys
-					if (!sys.FileSystem.exists("assets/dud.png")) {
+					if (!sys.FileSystem.exists(SUtil.getPath() + "assets/dud.png")) {
 						System.exit(0);
 					}
 					#end
