@@ -170,12 +170,10 @@ class CodeStateNew extends MusicBeatState
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			MusicBeatState.switchState(new MainMenuState());
 		}
-		#if android
-                if (FlxG.keys.justPressed.ANY)
+                if (FlxG.keys.justPressed.ANY #if android || _virtualpad.dPad.justPressed #end)
 		{
 			FlxG.sound.play(Paths.sound('keyboardPress'));
 		}
-	        #end
            }
 	
 	function badcode() {
