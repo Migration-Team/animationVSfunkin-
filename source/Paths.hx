@@ -163,7 +163,7 @@ class Paths
 	
 	inline static public function lowhpmusic(song:String)
 	{
-		return 'songs:assets/songs/${song.toLowerCase()}/InstLowHP.$SOUND_EXT';
+		return SUtil.getPath() + 'songs:assets/songs/${toLowerCase(song)}/InstLowHP.$SOUND_EXT';
 	}
 
 	inline static public function txt(key:String, ?library:String)
@@ -231,7 +231,7 @@ class Paths
 
 	inline static public function inst(song:String):Any
 	{
-		var songKey:String = '${song.toLowerCase().replace(' ', '-')}/Inst';
+		var songKey:String = songKey:String = '${formatToSongPath(song)}/Inst';
 		var inst = returnSound('songs', songKey);
 		return inst;
 	}
