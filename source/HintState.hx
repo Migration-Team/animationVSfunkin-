@@ -28,7 +28,11 @@ class HintState extends MusicBeatState
 
     override function create()
     {
-        super.create();
+        #if android
+	addVirtualPad(NONE, A);
+	#end
+	    
+	    super.create();
 
         camChosen = new FlxCamera();
         camOther = new FlxCamera();
