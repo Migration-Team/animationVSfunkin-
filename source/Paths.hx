@@ -163,7 +163,7 @@ class Paths
 	
 	inline static public function lowhpmusic(song:String)
 	{
-		return SUtil.getPath() + 'songs:assets/songs/${toLowerCase(song)}/InstLowHP.$SOUND_EXT';
+		return SUtil.getPath() + 'songs:assets/songs/${song.toLowerCase()}/InstLowHP.$SOUND_EXT';
 	}
 
 	inline static public function txt(key:String, ?library:String)
