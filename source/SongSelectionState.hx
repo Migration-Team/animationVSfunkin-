@@ -290,6 +290,10 @@ class SongSelectionState extends MusicBeatState
 			spr.x = ((spr.ID - realcurselected) * 400) + (FlxG.height * 0.65);
 		});
 
+		#if android
+                addVirtualPad(LEFT_RIGHT, A_B_X_Y);
+                #end
+		
 		super.create();
 	}
 
@@ -316,8 +320,8 @@ class SongSelectionState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-		var ctrl = FlxG.keys.justPressed.CONTROL;
-		var space = FlxG.keys.justPressed.SPACE;
+		var ctrl = FlxG.keys.justPressed.CONTROL #if android || _virtualpad.buttonY.justPressed #end;
+		var space = FlxG.keys.justPressed.SPACE #if android || _virtualpad.buttonX.justPressed #end;
 		
 		Conductor.songPosition = FlxG.sound.music.time;
 		
