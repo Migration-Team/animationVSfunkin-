@@ -549,11 +549,6 @@ class MainMenuState extends MusicBeatState
 					{
 						case 'play':
 							startSong([
-								'unwelcomed',
-								'mastermind',
-								'stickin-to-it',
-								'repeater',
-								'rock-blocks',
 								'stick-symphony'
 							]);
 						case 'freeplay':
