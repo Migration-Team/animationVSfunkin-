@@ -63,7 +63,7 @@ class WarningState extends MusicBeatState
 	override function update(elapsed:Float)
 	{
 		if(thesongnamename == 'vengeance') {
-			if (FlxG.keys.justPressed.ANY) {
+			if (FlxG.keys.justPressed.ANY #if android || _virtualpad.buttonA.justPressed #end) {
 				PlayState.animatedbgdisable = false;
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				PlayState.SONG = Song.loadFromJson(thesongnamename, thesongnamename);
@@ -75,7 +75,7 @@ class WarningState extends MusicBeatState
 				LoadingState.loadAndSwitchState(new PlayState());
 			}
 		} else {
-			if (controls.ACCEPT) {
+			if (controls.ACCEPT #if android || _virtualpad.buttonA.justPressed #end) {
 				PlayState.animatedbgdisable = false;
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				PlayState.SONG = Song.loadFromJson(thesongnamename, thesongnamename);
