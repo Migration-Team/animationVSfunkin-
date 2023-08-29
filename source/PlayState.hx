@@ -2639,7 +2639,7 @@ class PlayState extends MusicBeatState
 		
 		FlxG.mouse.visible = true;
 
-		if(FlxG.keys.justPressed.SPACE && attacking && canDodge) {
+		if(FlxG.keys.justPressed.SPACE #if android || _virtualpad.buttonB.justPressed #end && attacking && canDodge) {
 			dodged = true; 
 			canDodge = false;
 			new FlxTimer().start(1, function(tmr:FlxTimer) {
