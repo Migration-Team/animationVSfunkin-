@@ -2676,7 +2676,7 @@ class PlayState extends MusicBeatState
 				spr.x -= 1000;
 			});
 	
-			if (FlxG.keys.justPressed.SPACE #if android || _virtualpad.buttonB.justPressed #end && canDodge)
+			if (FlxG.keys.justPressed.SPACE && canDodge)
 				{
 					boyfriend.playAnim('dodge', true);
 					new FlxTimer().start(0.1, function(tmr:FlxTimer) {
