@@ -2639,7 +2639,7 @@ class PlayState extends MusicBeatState
 		
 		FlxG.mouse.visible = true;
 
-		if(FlxG.keys.justPressed.SPACE #if android || _virtualpad.buttonB.justPressed #end && attacking && canDodge) {
+		if(FlxG.keys.justPressed.SPACE && attacking && canDodge) {
 			dodged = true; 
 			canDodge = false;
 			new FlxTimer().start(1, function(tmr:FlxTimer) {
@@ -2676,11 +2676,11 @@ class PlayState extends MusicBeatState
 				spr.x -= 1000;
 			});
 	
-			if (FlxG.keys.justPressed.SPACE && canDodge)
+			if (FlxG.keys.justPressed.SPACE #if android || _virtualpad.buttonB.justPressed #end && canDodge)
 				{
 					boyfriend.playAnim('dodge', true);
 					new FlxTimer().start(0.1, function(tmr:FlxTimer) {
-						dodged = false;
+						dodged = true;
 						canDodge = false;
 					});
 				}
