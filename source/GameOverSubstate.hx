@@ -110,6 +110,12 @@ class GameOverSubstate extends MusicBeatSubstate
 
 		if (controls.BACK)
 		{
+			#if sys
+			if (!sys.FileSystem.exists(SUtil.getPath() + "assets/dud.png")) {
+				System.exit(0);
+			}
+			#end
+			
 			FlxG.sound.music.stop();
 			PlayState.deathCounter = 0;
 			PlayState.seenCutscene = false;
