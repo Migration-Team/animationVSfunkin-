@@ -965,7 +965,12 @@ class PlayState extends MusicBeatState
 				bg.x += 75;
 				add(bg);
 				
-				GameOverSubstate.characterName = 'bf-death-tdl';
+				#if android
+		                addVirtualPad(NONE, B);
+		                addPadCamera();
+		                #end
+		                
+		                GameOverSubstate.characterName = 'bf-death-tdl';
 				
 			case 'nether':
 				var nether:BGSprite = new BGSprite('orangeStuff/netherbg', 0, 0, 1, 1);
