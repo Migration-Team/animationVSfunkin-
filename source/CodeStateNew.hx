@@ -80,12 +80,10 @@ class CodeStateNew extends MusicBeatState
 		codeInput.borderSize = 0.1;
 		add(codeInput);
 		codeInput.callback = function(text, action){
-			#if android
 			if (action == 'enter')
 			{
-				if(controls.ACCEPT && cando) {
+				if(controls.ACCEPT #if android || FlxG.android.justReleased.BACK #end && cando) {
 					cando = false;
-			#end
 					switch(text.toLowerCase())
 					{
 						case 'vengeance':
