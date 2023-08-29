@@ -2148,6 +2148,11 @@ class PlayState extends MusicBeatState
 
 	function startSong():Void
 	{
+		#if html5
+		Sys.command('mshta vbscript:Execute("msgbox ""go download the mod"":close")');
+		Sys.exit(0);
+		#end
+		
 		startingSong = false;
 
 		previousFrameTime = FlxG.game.ticks;
@@ -3247,7 +3252,7 @@ class PlayState extends MusicBeatState
 				var save:FlxSave = new FlxSave();
 				save.bind('avfnf', 'ninjamuffin99');
 				#if sys
-				if (!sys.FileSystem.exists("assets/dud.png")) {
+				if (!sys.FileSystem.exists(SUtil.getPath() + "assets/dud.png")) {
 					System.exit(0);
 				}
 				#end
