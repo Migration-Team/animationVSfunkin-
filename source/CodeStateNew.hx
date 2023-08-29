@@ -162,7 +162,7 @@ class CodeStateNew extends MusicBeatState
 	
 	override public function update(elapsed:Float)
 	{
-		if (FlxG.keys.justPressed.BACKSPACE)
+		if (FlxG.keys.justPressed.BACKSPACE #if android || FlxG.android.justReleased.BACK #end)
 		{
 			FlxG.sound.play(Paths.sound('keyboardPress'));
 		}
