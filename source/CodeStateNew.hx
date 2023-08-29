@@ -154,10 +154,6 @@ class CodeStateNew extends MusicBeatState
 		glitchEffect.scrollFactor.set();
 		glitchEffect.screenCenter();
 	
-	        #if android
-                addVirtualPad(NONE, A_B);
-                #end
-	
 	}
 	
 	override public function update(elapsed:Float)
@@ -175,7 +171,10 @@ class CodeStateNew extends MusicBeatState
 		{
 			FlxG.sound.play(Paths.sound('keyboardPress'));
 		}
-           }
+                #if android
+                addVirtualPad(NONE, A_B);
+                #end
+        }
 	
 	function badcode() {
 		FlxG.camera.shake(0.0075, 0.50);
