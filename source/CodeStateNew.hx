@@ -70,7 +70,7 @@ class CodeStateNew extends MusicBeatState
 		windowPopUp.antialiasing = ClientPrefs.globalAntialiasing;
 		add(windowPopUp);
 		
-		codeInput = new FlxInputText(475, 325, FlxG.width, "", 32, FlxColor.BLACK, FlxColor.TRANSPARENT #if android '(Touch)' #else '(ANY)' #end, true);
+		codeInput = new FlxInputText(475, 325, FlxG.width, #if android '(Touch)' #else '(ANY)' #end, 32, FlxColor.BLACK, FlxColor.TRANSPARENT, true);
 		codeInput.setFormat(Paths.font("tahoma.ttf"), 16, FlxColor.BLACK, FlxTextBorderStyle.OUTLINE,FlxColor.WHITE);
 		codeInput.scrollFactor.set();
 		codeInput.backgroundColor = FlxColor.TRANSPARENT;
