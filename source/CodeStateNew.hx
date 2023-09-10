@@ -70,7 +70,7 @@ class CodeStateNew extends MusicBeatState
 		windowPopUp.antialiasing = ClientPrefs.globalAntialiasing;
 		add(windowPopUp);
 		
-		codeInput = new FlxInputText(475, 325, FlxG.width, #if android '(Touch)' #else '(ANY)' #end, 32, FlxColor.BLACK, FlxColor.TRANSPARENT, true);
+		codeInput = new FlxInputText(475, 325, FlxG.width,'', 32, FlxColor.BLACK, FlxColor.TRANSPARENT, true);
 		codeInput.setFormat(Paths.font("tahoma.ttf"), 16, FlxColor.BLACK, FlxTextBorderStyle.OUTLINE,FlxColor.WHITE);
 		codeInput.scrollFactor.set();
 		codeInput.backgroundColor = FlxColor.TRANSPARENT;
@@ -82,7 +82,7 @@ class CodeStateNew extends MusicBeatState
 		codeInput.callback = function(text, action){
 			if (action == 'enter')
 			{
-				if(controls.ACCEPT #if android || FlxG.android.justReleased.BACK #end && cando) {
+				if(controls.ACCEPT && cando) {
 					cando = false;
 					switch(text.toLowerCase())
 					{
@@ -153,9 +153,9 @@ class CodeStateNew extends MusicBeatState
 		glitchEffect.animation.addByPrefix('idle', "g", 24, true);
 		glitchEffect.scrollFactor.set();
 		glitchEffect.screenCenter();
-	
-	        #if android
-                addVirtualPad(NONE, A_B);
+		
+		#if android
+                addVirtualPad(CHART_EDITOR, CHART_EDITOR);
                 #end
 	}
 	
