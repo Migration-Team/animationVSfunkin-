@@ -155,7 +155,7 @@ class CodeStateNew extends MusicBeatState
 		glitchEffect.screenCenter();
 		
 		#if android
-                addVirtualPad(CHART_EDITOR, CHART_EDITOR);
+                addVirtualPad(NONE, A_B);
                 #end
 	}
 	
